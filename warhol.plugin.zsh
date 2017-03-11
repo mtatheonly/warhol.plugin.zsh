@@ -3,8 +3,12 @@
 # I use grc to colorize the output of some commands for clarity.
 #
 # brew install grc on OS X to check it out.
-
-GRC=$(which -p grc)
+IS_FEDORA=`lsb_release -i | grep Fedora`
+if [ "x$?" != "x0" ]; then
+  GRC=$(which -p grc)
+else
+  GRC=$(whence -p grc)
+fi
 
 if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
   alias colourify="$GRC -es --colour=auto"
